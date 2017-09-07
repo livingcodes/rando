@@ -1,0 +1,73 @@
+address blog.accounts // (namespace) isolation schema group bubble circle enclose file, envelope, address, region
+blog.accounts.user // prefix object definition with address
+
+user // object definition
+ number id
+ text firstName, lastName
+
+status // option definition
+ [email exists]
+ [succeeded]
+ [failed]
+
+sign up // action definition
+ < text email
+ < text password
+
+
+ if [(email) does not exist in (database)] then
+  > result.[new(
+   message:'An account already exists with this email.'
+   status:status[email exists]
+  )]
+
+ > result
+
+(text email) does not exist in (database database)
+ return database
+  .parameter @email, email
+  .query "select id from users where email = @email"
+  .rows.count == 0
+
+
+if (!signUpRepository.ContainsEmail(email))
+{
+ return new result(
+  message:...,
+  status:...
+ );
+}
+
+class SignUpRepository
+{
+   public SignUpRepository(string connectionString)
+   {
+      ...
+   }
+   public bool ContainsEmail(string email)
+   {
+      var table = database
+	 .parameter("@Email", email)
+	 .query("SELECT Id FROM Users WHERE Email = @Email")
+   }
+}
+
+class database
+{
+   public database parameter(string name, object value)
+   {
+      parameters.Add(name, value);
+   }
+   public DataTable select(string sql)
+   {
+      table.Load(reader);
+      return reader
+   }
+}
+
+blog.accounts.signup(email, password)
+
+blog.accounts.[sign up(email, password)]
+
+blog.accounts.[sign up(email, password)]
+ 
