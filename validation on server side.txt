@@ -1,0 +1,35 @@
+markup
+<div class="control">
+	<label>{Email} <a title="[Only shown in CMS]">i</a></label>
+	<input type="text" id="[email]" [max-length="100"] [type="email"] [required]>
+</div>
+
+javascript
+// don't validate email exists until submit
+// don't validate password until submit
+var 
+	
+c# scaffolding
+var emailTextBox = new Textbox(
+		id:"email"
+		label:"Email", 
+		title:"Login email"
+	)
+	.Attribute("type", "email")
+	.Validators(v => v
+		.Required()
+		.MaxLength(100)
+		.RegEx(RegEx.Email)
+		.Validator(x => db.DoesEmailExist(x.Value), "Email already registered.")
+		.Validator(x => oops.MightHaveMadeCommonEmailMistake(x.Value), Suggest)
+		.Validator(x => oops.CertainlyMadeCommonEmailMistake(x.Value), Mandate)
+	)
+	
+c# controller
+void post(request) {
+	if (!emailTextBox.IsValid) {
+		validationControl.Message = emailTextBox.ValidationMessage;
+		return;
+	}
+	emailTextBox.Value;
+}

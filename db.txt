@@ -1,0 +1,87 @@
+class Sproc
+    {
+        public Sproc Parameter(string key, object value) {
+            return this;
+        }
+        public T Select<T>() { return default(T); }
+    }
+	interface IDatabase
+	{
+		Sproc Sproc(string name);
+		T Sproc<T>(string name, params object[] parameterValues);
+		
+		Query Select(string sql);
+		T Select<T>(string sql);
+		
+		T Save<T>(T instance);
+		T Update<T>(T instance);
+		T Insert<T>(T instance);
+		int Delete<T>(id);
+
+		T Execute<T>(string sql);
+		
+		Database StartTransaction();
+		Database CommitTransaction();
+		Database RollbackTransaction();
+		void Dispose();
+	}
+	interface IAdminDatabase
+	{
+		void TruncateTable(string table);
+		void DropTable(string table);
+		void CreateTable(string table);
+		CreateTable("User")
+			.CreateColumn("Id", Type.INT, c => { c.PrimaryKey(); })
+			.CreateColumn("Email", Type.VARCHAR(80))
+			.CreateColumn("FavoriteColor", Type.VARCHAR(20))
+			.CreateColumn("DateCreated", Type.DateTime, c => c.DefaultValueIsGetDate())
+			.AddNonclusterIndex("FavoriteColorIndex", c => c.Column("FavoriteColor"))
+	}
+    class Database
+    {
+        public Sproc Sproc(string name) {
+            return new Sproc();
+        }
+        public T Sproc<T>(string name, params object[] parameterValues) {
+            return default(T);
+        }
+        public T Execute<T>(string sql) {
+            return default(T);
+        }
+        public Database StartTransaction() {
+            return this;
+        }
+        public Database CommitTransaction() {
+            return this;
+        }
+        public Database RollbackTransaction() {
+            return this;
+        }
+    }
+    class Main
+    {
+        Main(Database db) {
+            var report = db.Sproc("GetVideo")
+                .Parameter("@TeacherId", 1)
+                .Select<Report>();
+
+            var teacherId = 1;
+            report = db.Sproc<Report>("GetVideo", teacherId);
+
+            report = db.Execute<Report>("EXEC GetVideo 1");
+
+            try {
+                db.StartTransaction();
+                db.Sproc("AddCommission");
+                db.Sproc("SubtractFees");
+                db.CommitTransaction();
+            }
+            catch (Exception ex) {
+                db.RollbackTransaction();
+            }
+            
+        }
+    }
+    class Report {
+        public string Title;
+    }

@@ -1,0 +1,35 @@
+// markup
+<input type="text" id="email" x-required />
+<x-required control-id="email" />
+<x-required control-id="email">Override default message</x-required>
+<x-required control-id="email"><span class="anything">Override default message</span></x-required>
+<x-required control-id="email" warn>Required to receive magazine</x-required>
+<x-required control-id="email" error>Required to sign up</x-required>
+<x-required control-id="email" info>Used when you forget password</x-required>fs
+
+onTextChanged
+onLeaveFocus
+onTextChanged.after(700msec)
+
+validator
+	valid
+	message
+	
+message
+	level
+	text
+	
+required : validator
+	validate()
+		return !(value == undefined || value == null || value == "")
+	
+var required = new Required(textbox)
+
+var level = new function(value) {
+	this.value = value
+}
+	
+var info = new Level("info")
+var warn = new Level("warn")
+var error = new Level("error")
+	

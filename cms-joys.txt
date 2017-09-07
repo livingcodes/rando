@@ -1,0 +1,55 @@
+base{id}
+content{metadata}
+blog{posts}
+post{title, story, comments}
+comment{story}
+user{username, password}
+metadata{name, version, publish-date, unpublish-date, create-date, modify-date, author-id}
+permission{user.id, post.id, authorization}
+authorization{read, write, deny}
+group{name, users}
+
+relate users and groups to permissions
+
+relate users and subgroups to groups
+
+user.IsIn(group);     // [GroupId][UserId] Select Count(GroupId) From Groups Where GroupId = @gid AND UserId = @uid
+user.IsIn<Group>(groupId);
+group.Contains(user); // [GroupId][UserId] 
+group.Contains<User>(userId)
+var groups = new GroupDb(); groups.All(g => g.UserId == uid) // All Groups User Is In
+// All Admins
+
+
+blog = db.get(id).one()
+posts = db.get(post => post.blog-id={blog.id})
+post = db.get<post>(where blog_id={blog.id} order by publish_date desc)
+comments = db.get<comment>(where post_id={post.id} order by publish-date desc)
+comments[0].story
+
+
+post{title, story,
+	comments{
+		comment{story, 
+			metadata{id, name, version, publish-date, unpublish-date, create-date, modify-date, creator}
+		}
+		comment{...}
+	}
+	metadata{id, name, version, publish-date, unpublish-date, create-date, modify-date, creator}
+}
+
+news{title, article, publish-date, unpublish-date}
+
+content-editor{template}
+field-editor{value} clean-value, as-is-value
+
+video, photos, news
+
+page(content) not required
+theme(css files, inline)
+
+string, datetime, int, double
+
+string:textbox
+
+settings { key, value, description }

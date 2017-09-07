@@ -1,0 +1,28 @@
+class LogEntry
+{
+	public DateTime Date;
+	public string Level;
+	public string Key;
+	public string Description;
+}
+
+// log files = copy log files from web server
+// output = read log files
+// for each exception aggregate in output.exception aggregate list
+	exception = new exception() {
+		name = exception type.name
+		,count = exception type.count
+	}
+
+page
+Date Range	2016-11-01 - 2016-11-16
+
+Count	Name							
+312		Header Changed					
+.NET issue. Does not appear to affect user.		
+System.WebException		
+/
+
+121		Missing Video ID Query String on Video Detail Page
+Video ID query string is not set. There might be a bad link in the site.
+/videos/detail?video-id=1234

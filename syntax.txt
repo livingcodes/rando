@@ -1,0 +1,197 @@
+namespace Namespace
+{
+public class User
+{
+	public User(string name, DateTime birthDate)
+	{
+		Name = name;
+		BirthDate = birthDate;
+	}
+	public int Id { get; set; }
+	public string Name { get; set; }
+	public DateTime BirthDate { get; set; }
+	public int Age 
+	{
+		get { return DateTime.Now - BirthDate; }
+	}
+}
+}
+
+app.user(property string name, property date birth_date)
+	int id
+	int age => return now - birth_date
+	
+- private
++ public
+o override
+	
+// immutable keyword - compiler makes properties readonly by default and disallows setters
+immutable app.user
+	(+int id, +string name, date birthdate)
+		age = (now - birthdate).years
+	+int age
+	
+	
+app.user
+	app.user(-int id, +string name, +date birthdate, string greeting() = null)
+		if greeting is not null
+			this.greeting = greeting
+	app.user()
+	int age => return now - birthdate
+			<= birthdate = now.years(-value)
+	ostring greeting()
+		return "hello"
+
+!@#$%^&*()_+(){}<>[]~+-=`:?\/**/
+app.user(str name, dte birth_date)
+	int id
+	int age => get now - birth_date
+
+app.user(string name, date birth_date)
+	int id
+	int age => get now - birth_date
+	
+var user = new user("casey", #2016-12-22#)
+log.debug("user.age {user.age}, user.name {user.name}")
+log.debug({user.visualize()})
+db.save(user)
+
+App.User(string User, DateTime BirthDate)
+	int Id
+	int Age get Now - BirthDate
+	
+App.User(str Name, date BirthDate)
+	int Id
+	int Age get Now - BirthDate
+	
+App.User(str Name, date _birthDate, date _hireDate)
+	int Id
+	int Age => return Now - _birthDate // public property
+	str readableId => return "{Name}|{Age}|{Id}" // protected
+	mon CalcSalary() => return 
+		if group (Now - _hireDate).Years
+			> 9 then $70,000
+			> 5 then $60,000
+			> 3 then $50,000
+			> 1 then $40,000
+			else then $30,000
+	
+	dbl
+	flt
+	i64
+	i32
+	dte
+	byt
+	bit
+	
+Namespace.User
+	User(string @Name, DateTime @BirthDate)
+	int @Id
+	int @Age
+		get => return DateTime.Now - BirthDate
+		
+Namespace.User(string @Name, DateTime @BirthDate)
+	int @Id
+	int @Age
+		get => return DateTime.Now - BirthDate
+		
+Immutable Namespace.User(string @Name, DateTime @BirthDate)
+	int @Id
+		set => Id = value
+	int @Age
+		get => return DateTime.Now - BirthDate
+		
+Immutable Messaging.StartTransfer
+	new(string @Text)
+		@SentTime = Now
+	time @SentTime
+	
+namespace Messaging
+{
+	public class StartTransfer
+	{
+		public StartTransfer(string text)
+		{
+			Text = text;
+			SentTime = DateTime.Now;
+		}
+		
+		public DateTime SentTime { get; private set; }
+		public string Text { get; private set; }
+	}
+}
+		
+namespace Namespace
+{
+public class User
+{
+	public User(string name, DateTime birthDate)
+	{
+		this.Name = name;
+		this.BirthDate = birthDate;
+	}
+	
+	public int Id { get; set; }
+	public string Name { get; private set; }
+	public DateTime BirthDate { get; private set; }
+	public string Age
+	{
+		get
+		{
+			return DateTime.Now - BirthDate;
+		}
+	}
+}
+}
+
+User
+	int @Id
+	string @Name
+	
+User(string @Name)
+	int @Id
+	
+Commands.Pay
+	new(CreditCard _cc, Order _order, User _user,  // private fields
+		IPaymentProcessor _processor, 
+		Database _db, 
+		IMailMan _mailman, 
+		IAnalytics _analytics, 
+		INotifier _notifier)
+	
+	Execute()
+		var status = processor.Pay(cc.Number, order.Total)
+		if status.Succeeded
+			return status
+		
+		_order.Status = "Paid"
+		_db.Save(order)
+		
+		_mailman.Key("Order Confirmation")
+			.CC(["dev@work.com", "support@work.com"])
+			.Values([Name:_user.Name])
+			.Send()
+		
+		_analytics.Track("Pay", user, cc.Last4)
+		
+		_notifier.Notify(["Developers", "Support"], "Paid", [user, order])
+		return status
+		
+Pages.Pay
+	new Pay(screen.CC, workflow.Order, user, inject...).Execute()
+			
+			
+// case-sensative property generation
+// there would be no property for name (lowercase)
+// but there would be a property generated for BirthDate (uppercase)
+Namespace
+	User(String name, DateTime BirthDate)
+		FirstName = name.Split(' ')[0]
+	String FirstName
+	Int @Id
+	Int @Age
+		get => return Now - BirthDate
+
+
+for each command in pipeline.Commands
+	command.Execute(context)

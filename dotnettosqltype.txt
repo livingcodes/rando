@@ -1,0 +1,29 @@
+class User
+{
+	public int Id;
+	public string Name;
+	public DateTime BirthDate;
+}
+
+interface ITypeConverter<DotNetType, DatabaseType>
+{
+	DatabaseType Convert<DotNetType, DatabaseType>(DotNetType value);
+}
+
+class StringToNVarCharConverter : ITypeConverter<string, NVarChar>
+{
+	public NVarChar Convert<string>(string value) {
+		return value;
+	}
+}
+
+DateTimeToDateTimeConverter<DateTime, MsSql.DateTime>
+	MsSql.DateTime Convert(DateTime value)
+		// optional microseconds, am/pm
+		return value.ToString('yyyy-MM-dd HH-mm-ss')
+		
+IntToIntConverter<Int, MsSql.Int>
+	MsSql.Int Convert(int value)
+		// check min and max
+		return value
+		
